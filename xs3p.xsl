@@ -325,7 +325,7 @@
             <xsl:choose>
                <!-- Sort schema components -->
                <xsl:when test="normalize-space(translate($sortByComponent,'TRUE','true'))='true'">
-                  <!-- Declarations -->
+                  <!-- Global Declarations -->
                   <xsl:if test="xsd:attribute or xsd:element">
                      <h2><a name="SchemaDeclarations">Global Declarations</a></h2>
                      <xsl:apply-templates select="xsd:attribute | xsd:element" mode="topSection">
@@ -333,7 +333,7 @@
                         <xsl:sort select="@name" order="ascending"/>
                      </xsl:apply-templates>
                   </xsl:if>
-                  <!-- Definitions -->
+                  <!-- Global Definitions -->
                   <xsl:if test="xsd:attributeGroup or xsd:complexType or xsd:group or xsd:notation or xsd:simpleType">
                      <h2><a name="SchemaDefinitions">Global Definitions</a></h2>
                      <xsl:apply-templates select="xsd:attributeGroup | xsd:complexType | xsd:group | xsd:notation | xsd:simpleType" mode="topSection">
@@ -1474,7 +1474,7 @@ div#legend div.hint {
             <span style="margin-left: 1.5em">&lt;state&gt; <span class="type" style="text-decoration:underline;">AusStates</span> &lt;/state&gt; <span class="occurs">[1]</span></span><br/>
             <span style="margin-left: 1.5em">&lt;postcode&gt; <span class="constraint">string &lt;&lt;<em>pattern</em> = [1-9][0-9]{3}>></span> &lt;/postcode&gt; <span class="occurs">[1]</span>
                <xsl:if test="normalize-space(translate($useJavaScript,'TRUE','true'))='true'">
-                  <a href="javascript:void(0)" title="View Documentation" class="documentation" onclick="docArray = new Array('Post code must be a four-digit number.'); viewDocumentation('Element', 'postcode', docArray);">?</a>
+                  <a href="javascript:void(0)" title="HAMYChange" class="documentation" onclick="docArray = new Array('Post code must be a four-digit number.'); viewDocumentation('Element', 'postcode', docArray);">?</a>
                </xsl:if>
                </span><br/>
             </span>
@@ -4313,8 +4313,13 @@ A local schema component contains two dashes in
          </xsl:variable>
 
          <xsl:text> </xsl:text>
-         <a href="javascript:void(0)" title="View Documentation" class="documentation">
+         <a href="javascript:void(0)" title="HAMYDocs" class="documentation">
+            <xsl:attribute name="title">
+              <xsl:value-of select="$documentation"/>
+            </xsl:attribute>
+            <xsl:text>Documentation</xsl:text>
             <!-- onclick attribute -->
+            <!-- HAMYChange
             <xsl:attribute name="onclick">
                <xsl:text>docArray = new Array(</xsl:text>
                <xsl:value-of select="$documentation"/>
@@ -4336,6 +4341,7 @@ A local schema component contains two dashes in
                <xsl:text>', docArray);</xsl:text>
             </xsl:attribute>
             <xsl:text>?</xsl:text>
+          -->
          </a>
       </xsl:if>
    </xsl:template>
